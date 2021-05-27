@@ -1,0 +1,11 @@
+<p-dialog [header]="sistema.nombre" [(visible)]="display" modal="true" showEffect="fade" [style]="{width: '400px'}">
+    <p style="margin-top: 1em; margin-bottom: 1em">
+        {{sistema.codigo}} - {{sistema.desarrollador}}  
+    </p>
+    <p-footer>
+        <button type="button" pButton icon="pi pi-check" (click)="setSistema()" label="Yes"></button>
+        <button type="button" pButton icon="pi pi-times" (click)="closeModal()" label="No"
+            class="ui-button-secondary"></button>
+
+    </p-footer>
+</p-dialog>

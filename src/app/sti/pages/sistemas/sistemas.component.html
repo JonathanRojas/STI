@@ -1,15 +1,6 @@
 <div class="p-col-12">
 
-    <p-dialog *ngIf="display" [(header)]="sistemaSeleccionado.nombre" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-        [draggable]="false" [resizable]="false">
-        <p class="p-m-0">{{sistemaSeleccionado.desarrollador}}</p>
-        <p-footer>
-            <button type="button" pButton icon="pi pi-check" (click)="display=false" label="Yes"></button>
-            <button type="button" pButton icon="pi pi-times" (click)="display=false" label="No"
-                class="ui-button-secondary"></button>
-        </p-footer>
-    </p-dialog>
-
+    <app-sistemas-modal *ngIf="display" [display]="display" [sistema]="sistemaSeleccionado" (mostrar)="closeModal()"></app-sistemas-modal>
 
     <div class="card card-w-title">
         <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="sistemas" [paginator]="true" [rows]="10"
@@ -47,7 +38,7 @@
                     <td>{{rowData.desarrollador}}</td>
                     <td>
                         <button pButton type="button" class="ui-button-success" icon="pi pi-search"
-                            (click)="verSistema(rowData)" style="margin-right: .5em"></button>
+                            (click)="showModal(rowData)" style="margin-right: .5em"></button>
                         <button pButton type="button" class="ui-button-warning" icon="pi pi-pencil"></button>
                     </td>
                 </tr>

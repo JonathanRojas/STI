@@ -1,5 +1,7 @@
+import { ClassGetter } from "@angular/compiler/src/output/output_ast";
 import { Component, OnInit } from "@angular/core";
-import { Sistema } from "../../interfaces/interfaces";
+import { Sistema } from '../../interfaces/interfaces';
+
 
 @Component({
   selector: "app-sistemas",
@@ -23,18 +25,27 @@ export class SistemasComponent implements OnInit {
   display: boolean = false;
   sistemaSeleccionado: Sistema;
 
+
   ngOnInit() {
     this.cols = [
       { field: "codigo", header: "Código" },
       { field: "nombre", header: "Nombre" },
       { field: "desarrollador", header: "Desarrollador" },
     ];
-
-    console.log(this.sistemas);
   }
 
-  verSistema(sistema: Sistema) {
+  // verSistema(sistema: Sistema) {
+  //   this.display = true;
+  //   this.sistemaSeleccionado = sistema;
+  //   //console.log(sistema);
+  // }
+
+  showModal(sistema: Sistema) {
     this.display = true;
     this.sistemaSeleccionado = sistema;
+  }
+
+  closeModal(): void {
+    this.display=false;
   }
 }
