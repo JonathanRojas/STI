@@ -12,7 +12,7 @@
                         <p-sortIcon [field]="col.field"></p-sortIcon>
                     </th>
                     <th style="width: 8em; text-align: center;">
-                        <button pButton type="button" icon="pi pi-cog"></button>
+                        Ver
                     </th>
                 </tr>
                 <tr>
@@ -36,10 +36,10 @@
                     <td>{{rowData.codigo}}</td>
                     <td>{{rowData.nombre}}</td>
                     <td>{{rowData.desarrollador}}</td>
-                    <td>
+                    <td style="text-align: center;">
                         <button pButton type="button" class="ui-button-success" icon="pi pi-search"
                             (click)="showModal(rowData)" style="margin-right: .5em"></button>
-                        <button pButton type="button" class="ui-button-warning" icon="pi pi-pencil"></button>
+                        <!-- <button pButton type="button" class="ui-button-warning" icon="pi pi-pencil"></button> -->
                     </td>
                 </tr>
             </ng-template>

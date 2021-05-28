@@ -1,11 +1,85 @@
-<p-dialog [header]="sistema.nombre" [(visible)]="display" modal="true" showEffect="fade" [style]="{width: '400px'}">
-    <p style="margin-top: 1em; margin-bottom: 1em">
-        {{sistema.codigo}} - {{sistema.desarrollador}}  
-    </p>
+<p-dialog [header]="sistema.nombre" [(visible)]="display" modal="true" showEffect="fade" (onHide)="closeModal()"
+    [style]="{width: '90vw'}">
+
+    <p-tabView>
+        <p-tabPanel header="Sistema" leftIcon="pi pi-desktop">
+            <div class="p-col-12">
+                <div class="card card-w-title">                    
+                    <div class="p-grid form-group">
+                        <div class="p-col-6">
+                            <label for="acSimple">URL</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly" [(ngModel)]="sistema.nombre">
+                        </div>
+                        <div class="p-col-6">
+                            <label for="acAdvanced">Team Foundation Server</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-12">
+                            <label for="acAdvanced">Descripción</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-3">
+                            <label for="acAdvanced">Escritorio Virtual</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-3">
+                            <label for="acAdvanced">Tipo Aplicación</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-3">
+                            <label for="acAdvanced">Base Datos</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-3">
+                            <label for="acAdvanced">Estado Desarrollo</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-3">
+                            <label for="acAdvanced">Usuario</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-3">
+                            <label for="acAdvanced">Internet Information Server</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-3">
+                            <label for="acAdvanced">Framework Web</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-3">
+                            <label for="acAdvanced">Framework .NET</label>
+                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                        </div>
+                        <div class="p-col-12">
+                            <label for="acAdvanced">Nota Sistema</label>
+                            <!-- <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly"> -->
+                            <textarea [rows]="3" [cols]="30" pInputTextarea [style]="{'width': '100%'}" placeholder="Your Message"
+                            autoResize="autoResize"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Requerimientos" leftIcon="pi pi-inbox">
+            Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels
+            the young Vito
+            Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark
+            side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America
+            after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his
+            wife and growing brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary
+            cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.
+        </p-tabPanel>
+        <p-tabPanel header="Usuarios" leftIcon="pi pi-users">
+            After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the
+            well for this third
+            and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael
+            Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family
+            would one day be completely legitimate.
+        </p-tabPanel>
+    </p-tabView>
+
     <p-footer>
         <button type="button" pButton icon="pi pi-check" (click)="setSistema()" label="Yes"></button>
-        <button type="button" pButton icon="pi pi-times" (click)="closeModal()" label="No"
-            class="ui-button-secondary"></button>
-
+        <button type="button" pButton icon="pi pi-times" (click)="closeModal()" label="No" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>
