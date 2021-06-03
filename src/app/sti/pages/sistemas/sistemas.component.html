@@ -1,10 +1,11 @@
 <div class="p-col-12">
 
-    <app-sistemas-modal *ngIf="display" [display]="display" [sistema]="sistemaSeleccionado" (mostrar)="closeModal()"></app-sistemas-modal>
+    <app-sistemas-modal *ngIf="display" [display]="display" [sistema]="sistemaSeleccionado" (mostrar)="closeModal()">
+    </app-sistemas-modal>
 
     <div class="card card-w-title">
         <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="sistemas" [paginator]="true" [rows]="10"
-            dataKey="codigo" selectionMode="single" [(selection)]="sistemaSeleccionado">
+            dataKey="Id" selectionMode="single" [(selection)]="sistemaSeleccionado">
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field">
@@ -17,15 +18,21 @@
                 </tr>
                 <tr>
                     <th *ngFor="let col of columns" [ngSwitch]="col.field" style="padding: .5em;">
-                        <input *ngSwitchCase="'codigo'" pInputText type="text" placeholder="Comienza con"
+                        <input *ngSwitchCase="'Id'" pInputText type="text" placeholder="Comienza con"
                             class="ui-column-filter" style="width: 100%; margin-top: 0;"
                             (input)="dt.filter($event.target.value, col.field, 'startsWith')">
-                        <input *ngSwitchCase="'nombre'" pInputText type="text" placeholder="Contiene"
+                        <!-- <input *ngSwitchCase="'Codigo'" pInputText type="text" placeholder="Comienza con"
+                            class="ui-column-filter" style="width: 100%; margin-top: 0;"
+                            (input)="dt.filter($event.target.value, col.field, 'startsWith')"> -->
+                        <input *ngSwitchCase="'Nombre'" pInputText type="text" placeholder="Contiene"
                             class="ui-column-filter" style="width: 100%; margin-top: 0;"
                             (input)="dt.filter($event.target.value, col.field, 'contains')">
-                        <input *ngSwitchCase="'desarrollador'" pInputText type="text" placeholder="Comienza con"
+                        <input *ngSwitchCase="'TipoSistema.Nombre'" pInputText type="text" placeholder="Comienza con"
                             class="ui-column-filter" style="width: 100%; margin-top: 0;"
                             (input)="dt.filter($event.target.value, col.field, 'startsWith')">
+                        <input *ngSwitchCase="'Descripcion'" pInputText type="text" placeholder="Contiene"
+                            class="ui-column-filter" style="width: 100%; margin-top: 0;"
+                            (input)="dt.filter($event.target.value, col.field, 'contains')">
                     </th>
                     <th style="width: 8em;">
                     </th>
@@ -33,9 +40,11 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
-                    <td>{{rowData.codigo}}</td>
-                    <td>{{rowData.nombre}}</td>
-                    <td>{{rowData.desarrollador}}</td>
+                    <td>{{rowData.Id}}</td>
+                    <!-- <td>{{rowData.Codigo}}</td> -->
+                    <td>{{rowData.Nombre}}</td>
+                    <td>{{rowData.TipoSistema.Nombre}}</td>
+                    <td>{{rowData.Descripcion}}</td>
                     <td style="text-align: center;">
                         <button pButton type="button" class="ui-button-success" icon="pi pi-search"
                             (click)="showModal(rowData)" style="margin-right: .5em"></button>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Sistema } from '../../interfaces/interfaces';
+import { Sistema } from '../../interfaces/sistema.interface';
+import { SistemaService } from '../../services/sistema.service';
 
 @Component({
   selector: 'app-sistemas-modal',
@@ -9,20 +10,19 @@ import { Sistema } from '../../interfaces/interfaces';
 export class SistemasModalComponent implements OnInit{
 
   @Input() display: boolean;
-  @Input() sistema: Sistema = {
-    codigo:'a',
-    nombre:'b',
-    desarrollador:'c'
-  };
+  @Input() sistema: Sistema;
   @Output() mostrar: EventEmitter<any> = new EventEmitter(); 
+  lectura: boolean = true;
+  
+  constructor(private sistemaService: SistemaService){}
 
   ngOnInit(){
-    
+    this.lectura = !this.lectura;
   }
 
   setSistema() {
-    console.log(this.sistema);
-    //this.mostrar.emit(false);
+    this.sistemaService.setsistema(this.sistema).subscribe(sistema => console.log(sistema));
+    this.mostrar.emit(false);
   }
 
   closeModal() {

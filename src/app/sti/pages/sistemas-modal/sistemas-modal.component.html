@@ -1,60 +1,70 @@
-<p-dialog [header]="sistema.nombre" [(visible)]="display" modal="true" showEffect="fade" (onHide)="closeModal()"
+<p-dialog [header]="sistema.Nombre" [(visible)]="display" modal="true" showEffect="fade" (onHide)="closeModal()"
     [style]="{width: '90vw'}">
 
     <p-tabView>
         <p-tabPanel header="Sistema" leftIcon="pi pi-desktop">
             <div class="p-col-12">
-                <div class="card card-w-title">                    
+                <div class="card card-w-title">
                     <div class="p-grid form-group">
                         <div class="p-col-6">
                             <label for="acSimple">URL</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly" [(ngModel)]="sistema.nombre">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Sistema" [(ngModel)]="sistema.Url">
                         </div>
                         <div class="p-col-6">
                             <label for="acAdvanced">Team Foundation Server</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Ruta TFS">
                         </div>
                         <div class="p-col-12">
                             <label for="acAdvanced">Descripción</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Descripción" [(ngModel)]="sistema.Descripcion">
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Escritorio Virtual</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Escritorio Virtual">
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Tipo Aplicación</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Tipo Aplicación">
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Base Datos</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Base Datos">
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Estado Desarrollo</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Estado Desarrollo">
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Usuario</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Usuario">
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Internet Information Server</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="IIS">
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Framework Web</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Framework Web">
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Framework .NET</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly">
+                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
+                                placeholder="Framework .NET">
                         </div>
                         <div class="p-col-12">
                             <label for="acAdvanced">Nota Sistema</label>
-                            <!-- <input type="text" pInputText [style]="{'width': '100%'}" readonly="readonly" placeholder="Readonly"> -->
-                            <textarea [rows]="3" [cols]="30" pInputTextarea [style]="{'width': '100%'}" placeholder="Your Message"
-                            autoResize="autoResize"></textarea>
+                            <textarea [rows]="3" [cols]="30" pInputTextarea [style]="{'width': '100%'}"
+                                placeholder="Nota Sistema" autoResize="autoResize"></textarea>
                         </div>
                     </div>
                 </div>
@@ -79,7 +89,7 @@
     </p-tabView>
 
     <p-footer>
-        <button type="button" pButton icon="pi pi-check" (click)="setSistema()" label="Yes"></button>
-        <button type="button" pButton icon="pi pi-times" (click)="closeModal()" label="No" class="ui-button-secondary"></button>
+        <button type="button" pButton icon="pi pi-times" (click)="closeModal()" class="ui-button-secondary toLeft" label="Cerrar" ></button>
+        <button type="button" pButton icon="pi pi-check" (click)="setSistema()" label="Registrar Sistema"></button>            
     </p-footer>
 </p-dialog>
