@@ -42,7 +42,7 @@ export class SistemasComponent implements OnInit {
 
   loadCustomers(event: LazyLoadEvent) {
     this.loading = true;
-
+    //Prueba comentario2
     //in a real application, make a remote request to load data using state metadata from event
     //event.first = First row offset
     //event.rows = Number of rows per page
