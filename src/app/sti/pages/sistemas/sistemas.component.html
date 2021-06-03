@@ -2,9 +2,11 @@
 
     <app-sistemas-modal *ngIf="display" [display]="display" [sistema]="sistemaSeleccionado" (mostrar)="closeModal()">
     </app-sistemas-modal>
-
+    <p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
+    <button type="button" pButton (click)="showInfoViaToast()" label="success" class="ui-button-success"></button>
+    <!-- <p-progressSpinner></p-progressSpinner> -->
     <div class="card card-w-title">
-        <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="sistemas" [paginator]="true" [rows]="10"
+        <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="sistemas" [paginator]="true" [rows]="10" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading"
             dataKey="Id" selectionMode="single" [(selection)]="sistemaSeleccionado">
             <ng-template pTemplate="header" let-columns>
                 <tr>
