@@ -18,48 +18,41 @@
                         </div>
                         <div class="p-col-12">
                             <label for="acAdvanced">Descripción</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="Descripción" [(ngModel)]="sistema.Descripcion">
+                            <textarea [rows]="3" [cols]="30" pInputTextarea [style]="{'width': '100%'}"
+                                placeholder="Descripción" autoResize="autoResize"
+                                [(ngModel)]="sistema.Descripcion"></textarea>
                         </div>
                         <div class="p-col-3">
-                            <label for="acAdvanced">Escritorio Virtual</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="Escritorio Virtual">
+                            <label for="acAdvanced">Escritorio Virtual</label><br>
+                            <p-dropdown [options]="TipoEscritorioVirtual" [(ngModel)]="selectedTipoEV" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
-                            <label for="acAdvanced">Tipo Aplicación</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="Tipo Aplicación">
+                            <label for="acAdvanced">Tipo Aplicación</label><br>                            
+                            <p-dropdown [options]="TipoSistemas" [(ngModel)]="selectedTipoSistema" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Base Datos</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="Base Datos">
+                            <p-dropdown [options]="TipoBaseDatos" [(ngModel)]="selectedTipoBaseDatos" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Estado Desarrollo</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="Estado Desarrollo">
+                            <p-dropdown [options]="TipoEstadoDesarrollo" [(ngModel)]="selectedTipoEstadoDesarrollo" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Usuario</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="Usuario">
+                            <p-dropdown [options]="TipoUsuario" [(ngModel)]="selectedTipoUsuario" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Internet Information Server</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="IIS">
+                            <p-dropdown [options]="TipoIIS" [(ngModel)]="selectedTipoIIS" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Framework Web</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="Framework Web">
+                            <p-dropdown [options]="TipoFrameworkWeb" [(ngModel)]="selectedTipoFrameworkWeb" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Framework .NET</label>
-                            <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="Framework .NET">
+                            <p-dropdown [options]="TipoFrameworkNet" [(ngModel)]="selectedTipoFrameworkNet" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-12">
                             <label for="acAdvanced">Nota Sistema</label>
@@ -89,7 +82,8 @@
     </p-tabView>
 
     <p-footer>
-        <button type="button" pButton icon="pi pi-times" (click)="closeModal()" class="ui-button-secondary toLeft" label="Cerrar" ></button>
-        <button type="button" pButton icon="pi pi-check" (click)="setSistema()" label="Registrar Sistema"></button>            
+        <button type="button" pButton icon="pi pi-times" (click)="closeModal()" class="ui-button-secondary toLeft"
+            label="Cerrar"></button>
+        <button type="button" pButton icon="pi pi-check" (click)="setSistema()" label="Registrar Sistema"></button>
     </p-footer>
 </p-dialog>

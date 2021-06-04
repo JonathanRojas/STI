@@ -1,12 +1,9 @@
-export interface TipoSistema{
-    Id: number,    
-    Nombre: string    
-}
+import { Tipo } from "./tipo.interface";
 
 export interface Sistema {
     Id: number,    
     Nombre: string,
-    TipoSistema: TipoSistema,
+    TipoSistema: Tipo,
     Url: string,
     Descripcion: string
 }

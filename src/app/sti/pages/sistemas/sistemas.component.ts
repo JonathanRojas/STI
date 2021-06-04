@@ -29,28 +29,12 @@ export class SistemasComponent implements OnInit {
       { field: "Nombre", header: "Nombre" },
       { field: "TipoSistema.Nombre", header: "TipoSistema" },
       { field: "Descripcion", header: "Descripción" },
-    ];
-    this.sistemaService.getSistemas()
-      .subscribe((sistemas) => {
-        this.sistemas = sistemas;
-      }, (err) => {
-        //this.hayError = true;
-        console.log(err.message);
-        this.sistemas = [];
-      });
+    ];   
+    this.getSistemas();
   }
 
   loadCustomers(event: LazyLoadEvent) {
-    this.loading = true;
-    //Prueba comentario2
-    //in a real application, make a remote request to load data using state metadata from event
-    //event.first = First row offset
-    //event.rows = Number of rows per page
-    //event.sortField = Field name to sort with
-    //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-    //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
-
-    //imitate db connection over a network
+    this.loading = true; 
     setTimeout(() => {
       if (this.sistemas) {
         this.sistemas = this.sistemas.slice(
@@ -62,8 +46,16 @@ export class SistemasComponent implements OnInit {
     }, 1000);
   }
 
-  showInfoViaToast() {
-    this.messageService.add({ key: 'tst', severity: 'success', summary: 'Registro exitoso', detail: 'Sistema actualizado' });
+  getSistemas(){
+    this.loading = true;
+    this.sistemaService.getSistemas()
+    .subscribe((sistemas) => {
+      this.sistemas = sistemas;
+      this.loading = false;
+    }, (err) => {
+      console.log(err.message);
+      this.sistemas = [];
+    });
   }
 
   showModal(sistema: Sistema) {
@@ -73,5 +65,16 @@ export class SistemasComponent implements OnInit {
 
   closeModal(): void {
     this.display = false;
+  }
+
+  showMessage(mensaje: string): void {
+    if (mensaje === null){
+      this.messageService.add({ key: 'tst', severity: 'success', summary: 'Sistema registrado', detail: 'Sistema actualizado correctamente' });
+    }
+    else{
+      this.messageService.add({ key: 'tst', severity: 'error', summary: 'Ocurrió un error', detail: mensaje });
+      this.getSistemas();
+    }
+    
   }
 }
