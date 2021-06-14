@@ -25,10 +25,10 @@ export class SistemasComponent implements OnInit {
 
   ngOnInit() {
     this.cols = [
-      { field: "Id", header: "Id" },
+      { field: "Codigo", header: "Codigo" },
       { field: "Nombre", header: "Nombre" },
-      { field: "TipoSistema.Nombre", header: "TipoSistema" },
-      { field: "Descripcion", header: "Descripción" },
+      { field: "Desarrollador", header: "Últ. Desarrollador" },
+      { field: "FechaPublicacion", header: "Últ. Publicación" },
     ];   
     this.getSistemas();
   }
@@ -52,6 +52,7 @@ export class SistemasComponent implements OnInit {
     .subscribe((sistemas) => {
       this.sistemas = sistemas;
       this.loading = false;
+      debugger;
     }, (err) => {
       console.log(err.message);
       this.sistemas = [];

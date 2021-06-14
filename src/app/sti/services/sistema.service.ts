@@ -16,8 +16,7 @@ export class SistemaService {
   
   getSistemas(): Observable<Sistema[]> {
     return this.http.get<Sistema[]>(`${environment.apiURL}sistema/getSistemas`)
-    .pipe(map((data) => data['Data']
-    ));    
+    .pipe(map((response) => response['Data']));    
   }
 
   setsistema(sistema: Sistema): Observable<Response>{

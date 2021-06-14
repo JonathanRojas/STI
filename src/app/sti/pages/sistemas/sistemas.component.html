@@ -6,7 +6,8 @@
     <!-- <button type="button" pButton (click)="showInfoViaToast()" label="success" class="ui-button-success"></button> -->
     <!-- <p-progressSpinner></p-progressSpinner> -->
     <div class="card card-w-title">
-        <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="sistemas" [paginator]="true" [rows]="10" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [loading]="loading"
+        <!-- <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="sistemas" [paginator]="true" [rows]="10" dataKey="vin" selectionMode="single" [(selection)]="selectedCar"></p-table> -->
+        <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="sistemas" [paginator]="true" [rows]="10"  [loading]="loading"
             dataKey="Id" selectionMode="single" [(selection)]="sistemaSeleccionado">
             <ng-template pTemplate="header" let-columns>
                 <tr>
@@ -20,7 +21,7 @@
                 </tr>
                 <tr>
                     <th *ngFor="let col of columns" [ngSwitch]="col.field" style="padding: .5em;">
-                        <input *ngSwitchCase="'Id'" pInputText type="text" placeholder="Comienza con"
+                        <input *ngSwitchCase="'Codigo'" pInputText type="text" placeholder="Comienza con"
                             class="ui-column-filter" style="width: 100%; margin-top: 0;"
                             (input)="dt.filter($event.target.value, col.field, 'startsWith')">
                         <!-- <input *ngSwitchCase="'Codigo'" pInputText type="text" placeholder="Comienza con"
@@ -29,10 +30,10 @@
                         <input *ngSwitchCase="'Nombre'" pInputText type="text" placeholder="Contiene"
                             class="ui-column-filter" style="width: 100%; margin-top: 0;"
                             (input)="dt.filter($event.target.value, col.field, 'contains')">
-                        <input *ngSwitchCase="'TipoSistema.Nombre'" pInputText type="text" placeholder="Comienza con"
+                        <input *ngSwitchCase="'Desarrollador'" pInputText type="text" placeholder="Comienza con"
                             class="ui-column-filter" style="width: 100%; margin-top: 0;"
                             (input)="dt.filter($event.target.value, col.field, 'startsWith')">
-                        <input *ngSwitchCase="'Descripcion'" pInputText type="text" placeholder="Contiene"
+                        <input *ngSwitchCase="'FechaPublicacion'" pInputText type="text" placeholder="Contiene"
                             class="ui-column-filter" style="width: 100%; margin-top: 0;"
                             (input)="dt.filter($event.target.value, col.field, 'contains')">
                     </th>
@@ -42,11 +43,10 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
-                    <td>{{rowData.Id}}</td>
-                    <!-- <td>{{rowData.Codigo}}</td> -->
+                    <td>{{rowData.Codigo}}</td>
                     <td>{{rowData.Nombre}}</td>
-                    <td>{{rowData.TipoSistema.Nombre}}</td>
-                    <td>{{rowData.Descripcion}}</td>
+                    <td>{{rowData.Desarrollador}}</td>
+                    <td>{{rowData.FechaPublicacion | date: 'dd MMM yyyy'}}</td>
                     <td style="text-align: center;">
                         <button pButton type="button" class="ui-button-success" icon="pi pi-search"
                             (click)="showModal(rowData)" style="margin-right: .5em"></button>

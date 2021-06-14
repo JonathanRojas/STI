@@ -1,10 +1,13 @@
-import {NgModule} from '@angular/core';
+import {NgModule, LOCALE_ID} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AppRoutes} from './app.routes';
+import localeEs from '@angular/common/locales/es-CL';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs);
 
 import { PrimeNgModule } from './primeNG/primeNG.module';
 import { StiModule } from './sti/sti.module';
@@ -49,7 +52,6 @@ import {NodeService} from './demo/service/nodeservice';
 import {BreadcrumbService} from './breadcrumb.service';
 import {MenuService} from './app.menu.service';
 
-
 @NgModule({
     imports: [
         AppRoutes,
@@ -86,7 +88,8 @@ import {MenuService} from './app.menu.service';
         DocumentationComponent
     ],
     providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy},
+        // {provide: LocationStrategy, useClass: HashLocationStrategy},
+        { provide: LOCALE_ID, useValue: 'es-CL' },
         CarService, CountryService, EventService, NodeService, BreadcrumbService, MenuService
     ],
     bootstrap: [AppComponent]

@@ -1,9 +1,14 @@
 <p-dialog [header]="sistema.Nombre" [(visible)]="display" modal="true" showEffect="fade" (onHide)="closeModal()"
-    [style]="{width: '90vw'}">
-
+    [style]="{width: '90vw'}">    
     <p-tabView>
-        <p-tabPanel header="Sistema" leftIcon="pi pi-desktop">
-            <div class="p-col-12">
+        <div class="p-col-12" *ngIf="loading">
+            <div class="card">
+                <h1>Cargando...</h1>
+                <p-progressBar mode="indeterminate" [showValue]="false"></p-progressBar>
+            </div>
+        </div>
+        <p-tabPanel header="Sistema" leftIcon="pi pi-desktop">            
+            <div class="p-col-12" *ngIf="!loading">
                 <div class="card card-w-title">
                     <div class="p-grid form-group">
                         <div class="p-col-6">
