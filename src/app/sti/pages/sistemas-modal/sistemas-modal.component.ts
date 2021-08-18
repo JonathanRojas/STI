@@ -1,42 +1,45 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { forkJoin} from "rxjs";
+
+import { Requerimiento } from '../../interfaces/requerimiento.interface';
 import { Sistema } from "../../interfaces/sistema.interface";
 import { Tipo } from "../../interfaces/tipo.interface";
 import { SistemaService } from "../../services/sistema.service";
 import { TipoService } from "../../services/tipo.service";
-import { forkJoin } from "rxjs";
 
 @Component({
   selector: "app-sistemas-modal",
   templateUrl: "./sistemas-modal.component.html",
-  styles: [],
+  styles: [
+    `
+    ::ng-deep .p-datatable-scrollable-header-box {
+  margin-right: 17px !important;
+}
+    `
+  ],
 })
 export class SistemasModalComponent implements OnInit {
-  @Input() display: boolean;
-  @Input() sistema: Sistema;
-  @Output() mostrar: EventEmitter<any> = new EventEmitter();
-  @Output() sistemaSaved: EventEmitter<string> = new EventEmitter();
-  lectura: boolean = true;
-  error: string;
-  loading: boolean = true;
 
   /* #region variables*/
-  TipoSistemas: Tipo[] = [];
-  TipoEscritorioVirtual: Tipo[] = [];
-  TipoBaseDatos: Tipo[] = [];
-  TipoEstadoDesarrollo: Tipo[] = [];
-  TipoUsuario: Tipo[] = [];
-  TipoIIS: Tipo[] = [];
-  TipoFrameworkWeb: Tipo[] = [];
-  TipoFrameworkNet: Tipo[] = [];
+  @Input() display              : boolean;
+  @Input() sistema              : Sistema;
+  @Output() mostrar             : EventEmitter<any> = new EventEmitter();
+  @Output() sistemaSaved        : EventEmitter<string> = new EventEmitter();
+  lectura                       : boolean = true;
+  error                         : string;
+  loading                       : boolean = true;
+  
+  TipoSistemas                  : Tipo[] = [];
+  TipoEscritorioVirtual         : Tipo[] = [];
+  TipoBaseDatos                 : Tipo[] = [];
+  TipoEstadoDesarrollo          : Tipo[] = [];
+  TipoUsuario                   : Tipo[] = [];
+  TipoIIS                       : Tipo[] = [];
+  TipoFrameworkWeb              : Tipo[] = [];
+  TipoFrameworkNet              : Tipo[] = [];
+  Requerimientos                : Requerimiento[] = [];
 
-  selectedTipoSistema: Tipo;
-  selectedTipoEV: Tipo;
-  selectedTipoBaseDatos: Tipo;
-  selectedTipoEstadoDesarrollo: Tipo;
-  selectedTipoUsuario: Tipo;
-  selectedTipoIIS: Tipo;
-  selectedTipoFrameworkWeb: Tipo;
-  selectedTipoFrameworkNet: Tipo;
+  cols: any[];
 /* #endregion*/
 
   constructor(
@@ -47,7 +50,6 @@ export class SistemasModalComponent implements OnInit {
   ngOnInit() {
     this.lectura = !this.lectura;
 
-    //Se cargan los tipos de datos
     forkJoin([
       this.tipoService.getTipoSistemas(),
       this.tipoService.getTipoEscritorioVirtual(),
@@ -57,17 +59,12 @@ export class SistemasModalComponent implements OnInit {
       this.tipoService.getTipoIIS(),
       this.tipoService.getTipoFrameworkWeb(),
       this.tipoService.getTipoFrameworkNet(),
-    ]).subscribe(
-      ([
-        tipoSistemas,
-        tipoEscritorioVirtual,
-        tipoBaseDatos,
-        tipoEstadoDesarrollo,
-        tipoUsuario,
-        tipoIIS,
-        tipoFrameworkWeb,
-        tipoFrameworkNet,
-      ]) => {
+      this.sistemaService.getRequerimientos(227), //this.sistema.Id
+    ])
+    .subscribe(
+      ([tipoSistemas, tipoEscritorioVirtual, tipoBaseDatos, tipoEstadoDesarrollo, 
+        tipoUsuario, tipoIIS, tipoFrameworkWeb, tipoFrameworkNet, requerimientos] :
+      [Tipo[], Tipo[], Tipo[], Tipo[], Tipo[], Tipo[], Tipo[], Tipo[], Requerimiento[]]) => {
         this.TipoSistemas = tipoSistemas;
         this.TipoEscritorioVirtual = tipoEscritorioVirtual;
         this.TipoBaseDatos = tipoBaseDatos;
@@ -76,19 +73,18 @@ export class SistemasModalComponent implements OnInit {
         this.TipoIIS = tipoIIS;
         this.TipoFrameworkWeb = tipoFrameworkWeb;
         this.TipoFrameworkNet = tipoFrameworkNet;
-
-        //Setear valores según sistema
-        this.selectedTipoSistema = this.sistema.TipoSistema;
-        this.selectedTipoEV = this.sistema.TipoEscritorioVirtual;
-        this.selectedTipoBaseDatos = this.sistema.TipoBaseDatos;
-        this.selectedTipoEstadoDesarrollo = this.sistema.TipoEstadoDesarrollo;
-        this.selectedTipoUsuario = this.sistema.TipoUsuario;
-        this.selectedTipoIIS = this.sistema.TipoIIS;
-        this.selectedTipoFrameworkWeb = this.sistema.TipoFrameworkWeb;
-        this.selectedTipoFrameworkNet = this.sistema.TipoFrameworkNet;
+        this.Requerimientos = requerimientos;
         this.loading = false;
       }
-    );
+    );   
+
+    this.cols = [
+      { field: "TipoDesarrollador.Nombre", header: "Desarrollador", width: '20%' },
+      { field: "Descripcion", header: "Descripción", width: '50%' },
+      { field: "FechaInicio", header: "Inicio", width: '10%'  },
+      { field: "FechaTermino", header: "Termino", width: '10%'  },
+      { field: "TipoEstado.Nombre", header: "Estado", width: '10%'  },
+    ];  
   }
 
   setSistema() {

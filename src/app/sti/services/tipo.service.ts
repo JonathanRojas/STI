@@ -2,10 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/internal/operators/map";
-import { catchError } from "rxjs/operators";
 import { environment } from "src/environments/environment";
-import { Response } from "../interfaces/response.interface";
-import { Sistema } from "../interfaces/sistema.interface";
+import { Tipo } from "../interfaces/tipo.interface";
 
 @Injectable({
   providedIn: "root",
@@ -13,51 +11,51 @@ import { Sistema } from "../interfaces/sistema.interface";
 export class TipoService {  
   constructor(private http: HttpClient) {}
 
-  getTipoSistemas(): Observable<Sistema[]> {
+  getTipoSistemas(): Observable<Tipo[]> {
     return this.http
-      .get<Sistema[]>(`${environment.apiURL}tipo/TipoSistemaGetItems`)
+      .get<Tipo[]>(`${environment.apiURL}tipo/TipoSistemaGetItems`)
       .pipe(map((data) => data["Data"]));
   }  
 
-  getTipoEscritorioVirtual(): Observable<Sistema[]> {
+  getTipoEscritorioVirtual(): Observable<Tipo[]> {
     return this.http
-      .get<Sistema[]>(`${environment.apiURL}tipo/TipoEscritorioVirtualGetItems`)
+      .get<Tipo[]>(`${environment.apiURL}tipo/TipoEscritorioVirtualGetItems`)
       .pipe(map((data) => data["Data"]));
   }  
 
-  getTipoBaseDatos(): Observable<Sistema[]> {
+  getTipoBaseDatos(): Observable<Tipo[]> {
     return this.http
-      .get<Sistema[]>(`${environment.apiURL}tipo/TipoBaseDatosGetItems`)
+      .get<Tipo[]>(`${environment.apiURL}tipo/TipoBaseDatosGetItems`)
       .pipe(map((data) => data["Data"]));
   }  
 
-  getTipoEstadoDesarrollo(): Observable<Sistema[]> {
+  getTipoEstadoDesarrollo(): Observable<Tipo[]> {
     return this.http
-      .get<Sistema[]>(`${environment.apiURL}tipo/TipoEstadoDesarrolloGetItems`)
+      .get<Tipo[]>(`${environment.apiURL}tipo/TipoEstadoDesarrolloGetItems`)
       .pipe(map((data) => data["Data"]));
   }  
 
-  getTipoUsuario(): Observable<Sistema[]> {
+  getTipoUsuario(): Observable<Tipo[]> {
     return this.http
-      .get<Sistema[]>(`${environment.apiURL}tipo/TipoUsuarioGetItems`)
+      .get<Tipo[]>(`${environment.apiURL}tipo/TipoUsuarioGetItems`)
       .pipe(map((data) => data["Data"]));
   }  
 
-  getTipoIIS(): Observable<Sistema[]> {
+  getTipoIIS(): Observable<Tipo[]> {
     return this.http
-      .get<Sistema[]>(`${environment.apiURL}tipo/TipoIISGetItems`)
+      .get<Tipo[]>(`${environment.apiURL}tipo/TipoIISGetItems`)
       .pipe(map((data) => data["Data"]));
   }  
 
-  getTipoFrameworkWeb(): Observable<Sistema[]> {
+  getTipoFrameworkWeb(): Observable<Tipo[]> {
     return this.http
-      .get<Sistema[]>(`${environment.apiURL}tipo/TipoFrameworkWebGetItems`)
+      .get<Tipo[]>(`${environment.apiURL}tipo/TipoFrameworkWebGetItems`)
       .pipe(map((data) => data["Data"]));
   }  
 
-  getTipoFrameworkNet(): Observable<Sistema[]> {
+  getTipoFrameworkNet(): Observable<Tipo[]> {
     return this.http
-      .get<Sistema[]>(`${environment.apiURL}tipo/TipoFrameworkNetGetItems`)
+      .get<Tipo[]>(`${environment.apiURL}tipo/TipoFrameworkNetGetItems`)
       .pipe(map((data) => data["Data"]));
   }  
 }

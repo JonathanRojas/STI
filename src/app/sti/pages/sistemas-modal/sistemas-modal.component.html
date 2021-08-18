@@ -19,7 +19,7 @@
                         <div class="p-col-6">
                             <label for="acAdvanced">Team Foundation Server</label>
                             <input type="text" pInputText [style]="{'width': '100%'}" [readonly]="lectura"
-                                placeholder="Ruta TFS">
+                                placeholder="Ruta TFS" [(ngModel)]="sistema.UbicacionTeam">
                         </div>
                         <div class="p-col-12">
                             <label for="acAdvanced">Descripción</label>
@@ -29,53 +29,72 @@
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Escritorio Virtual</label><br>
-                            <p-dropdown [options]="TipoEscritorioVirtual" [(ngModel)]="selectedTipoEV" optionValue="Id" optionLabel="Nombre"></p-dropdown>
+                            <p-dropdown [options]="TipoEscritorioVirtual" [(ngModel)]="sistema.TipoEscritorioVirtual" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Tipo Aplicación</label><br>                            
-                            <p-dropdown [options]="TipoSistemas" [(ngModel)]="selectedTipoSistema" optionValue="Id" optionLabel="Nombre"></p-dropdown>
+                            <p-dropdown [options]="TipoSistemas" [(ngModel)]="sistema.TipoSistema" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Base Datos</label>
-                            <p-dropdown [options]="TipoBaseDatos" [(ngModel)]="selectedTipoBaseDatos" optionValue="Id" optionLabel="Nombre"></p-dropdown>
+                            <p-dropdown [options]="TipoBaseDatos" [(ngModel)]="sistema.TipoBaseDatos" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Estado Desarrollo</label>
-                            <p-dropdown [options]="TipoEstadoDesarrollo" [(ngModel)]="selectedTipoEstadoDesarrollo" optionValue="Id" optionLabel="Nombre"></p-dropdown>
+                            <p-dropdown [options]="TipoEstadoDesarrollo" [(ngModel)]="sistema.TipoEstadoDesarrollo" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Usuario</label>
-                            <p-dropdown [options]="TipoUsuario" [(ngModel)]="selectedTipoUsuario" optionValue="Id" optionLabel="Nombre"></p-dropdown>
+                            <p-dropdown [options]="TipoUsuario" [(ngModel)]="sistema.TipoUsuario" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Internet Information Server</label>
-                            <p-dropdown [options]="TipoIIS" [(ngModel)]="selectedTipoIIS" optionValue="Id" optionLabel="Nombre"></p-dropdown>
+                            <p-dropdown [options]="TipoIIS" [(ngModel)]="sistema.TipoIIS" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Framework Web</label>
-                            <p-dropdown [options]="TipoFrameworkWeb" [(ngModel)]="selectedTipoFrameworkWeb" optionValue="Id" optionLabel="Nombre"></p-dropdown>
+                            <p-dropdown [options]="TipoFrameworkWeb" [(ngModel)]="sistema.TipoFrameworkWeb" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-3">
                             <label for="acAdvanced">Framework .NET</label>
-                            <p-dropdown [options]="TipoFrameworkNet" [(ngModel)]="selectedTipoFrameworkNet" optionValue="Id" optionLabel="Nombre"></p-dropdown>
+                            <p-dropdown [options]="TipoFrameworkNet" [(ngModel)]="sistema.TipoFrameworkNet" optionValue="Id" optionLabel="Nombre"></p-dropdown>
                         </div>
                         <div class="p-col-12">
                             <label for="acAdvanced">Nota Sistema</label>
                             <textarea [rows]="3" [cols]="30" pInputTextarea [style]="{'width': '100%'}"
-                                placeholder="Nota Sistema" autoResize="autoResize"></textarea>
+                                placeholder="Nota Sistema" autoResize="autoResize" [(ngModel)]="sistema.Observacion"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
         </p-tabPanel>
-        <p-tabPanel header="Requerimientos" leftIcon="pi pi-inbox">
-            Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels
-            the young Vito
-            Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark
-            side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America
-            after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his
-            wife and growing brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary
-            cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.
+        <p-tabPanel header="Requerimientos" leftIcon="pi pi-inbox">            
+            <div class="p-col-12">
+                <div class="card card-w-title">
+                    <p-table [columns]="cols" [value]="Requerimientos" selectionMode="single" dataKey="Id"
+                             styleClass="p-datatable-sm"
+                             [responsive]="true">
+                             <!-- [scrollable]="true" scrollHeight="50vh" -->
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns" [pSortableColumn]="col.field" [ngSwitch]="col.field" [ngStyle]="{'width': col.width}">
+                                    {{col.header}}
+                                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                                </th>                                
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowRequerimiento let-columns="columns">
+                            <tr [pSelectableRow]="rowRequerimiento" [pEditableRow]="rowRequerimiento">
+                                <td>{{rowRequerimiento.TipoDesarrollador.Nombre}}</td>
+                                <td>{{rowRequerimiento.Descripcion}}</td>
+                                <td>{{rowRequerimiento.FechaInicio | date: 'dd MMM yyyy'}}</td>
+                                <td>{{rowRequerimiento.FechaTermino | date: 'dd MMM yyyy'}}</td>
+                                <td>{{rowRequerimiento.TipoEstado.Nombre}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
         </p-tabPanel>
         <p-tabPanel header="Usuarios" leftIcon="pi pi-users">
             After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the

@@ -52,7 +52,6 @@ export class SistemasComponent implements OnInit {
     .subscribe((sistemas) => {
       this.sistemas = sistemas;
       this.loading = false;
-      debugger;
     }, (err) => {
       console.log(err.message);
       this.sistemas = [];
@@ -73,9 +72,8 @@ export class SistemasComponent implements OnInit {
       this.messageService.add({ key: 'tst', severity: 'success', summary: 'Sistema registrado', detail: 'Sistema actualizado correctamente' });
     }
     else{
-      this.messageService.add({ key: 'tst', severity: 'error', summary: 'Ocurrió un error', detail: mensaje });
-      this.getSistemas();
+      this.messageService.add({ key: 'tst', severity: 'error', summary: 'Ocurrió un error', detail: mensaje });      
     }
-    
+    this.getSistemas();
   }
 }

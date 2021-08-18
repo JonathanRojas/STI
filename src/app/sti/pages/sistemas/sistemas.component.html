@@ -1,13 +1,11 @@
 <div class="p-col-12">
 
-    <app-sistemas-modal *ngIf="display" [display]="display" [sistema]="sistemaSeleccionado" (mostrar)="closeModal()" (sistemaSaved)="showMessage($event)" >
-    </app-sistemas-modal>
+    <app-sistemas-modal *ngIf="display" [display]="display" [sistema]="sistemaSeleccionado" (mostrar)="closeModal()" (sistemaSaved)="showMessage($event)" ></app-sistemas-modal>
     <p-toast key="tst" [style]="{marginTop: '70px'}"></p-toast>
     <!-- <button type="button" pButton (click)="showInfoViaToast()" label="success" class="ui-button-success"></button> -->
     <!-- <p-progressSpinner></p-progressSpinner> -->
     <div class="card card-w-title">
-        <!-- <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="sistemas" [paginator]="true" [rows]="10" dataKey="vin" selectionMode="single" [(selection)]="selectedCar"></p-table> -->
-        <p-table #dt [columns]="cols" styleClass="ui-table-cars" [value]="sistemas" [paginator]="true" [rows]="10"  [loading]="loading"
+        <p-table #dt [columns]="cols" styleClass="p-datatable-sm" [value]="sistemas" [paginator]="true" [rows]="10"  [loading]="loading"
             dataKey="Id" selectionMode="single" [(selection)]="sistemaSeleccionado">
             <ng-template pTemplate="header" let-columns>
                 <tr>
@@ -45,8 +43,8 @@
                 <tr [pSelectableRow]="rowData" [pEditableRow]="rowData">
                     <td>{{rowData.Codigo}}</td>
                     <td>{{rowData.Nombre}}</td>
-                    <td>{{rowData.Desarrollador}}</td>
-                    <td>{{rowData.FechaPublicacion | date: 'dd MMM yyyy'}}</td>
+                    <td>{{rowData.Desarrollador | desarrollador}}</td>
+                    <td>{{rowData.FechaPublicacion == null ? 'Sin Publicaciones' : (rowData.FechaPublicacion | date: 'dd MMM yyyy')}}</td>
                     <td style="text-align: center;">
                         <button pButton type="button" class="ui-button-success" icon="pi pi-search"
                             (click)="showModal(rowData)" style="margin-right: .5em"></button>

@@ -20,11 +20,13 @@ import { AppAccessdeniedComponent } from './pages/app.accessdenied.component';
 import { AppLoginComponent } from './pages/app.login.component';
 //STI
 import { SistemasComponent } from './sti/pages/sistemas/sistemas.component';
+import { InicioComponent } from './sti/pages/inicio/inicio.component';
 
 export const routes: Routes = [
     { path: '', component: AppMainComponent,
         children: [
             { path: '', component: DashboardDemoComponent },
+            { path: 'inicio', component: InicioComponent },
             { path: 'sistemas', component: SistemasComponent },
             { path: 'components/sample', component: SampleDemoComponent },
             { path: 'components/forms', component: FormsDemoComponent },
