@@ -1,0 +1,106 @@
+<div class="p-col-12" *ngIf="loading">
+    <div class="card">
+        <h1>Cargando...</h1>
+        <p-progressBar mode="indeterminate" [showValue]="false"></p-progressBar>
+    </div>   
+</div>
+<div class="p-grid layout-dashboard" *ngIf="!loading">    
+    <div class="p-col-12 p-xl-3 p-md-6">
+        <div class="p-grid p-nogutter overview-box overview-box-1">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-messages.svg" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h1>Administrativos</h1>
+                <span>{{estadisticas.AdmLast}} nuevos último mes</span>
+            </div>
+            <div class="p-col-3 overview-box-status">
+                {{estadisticas.Adm}}
+            </div>
+        </div>
+    </div>
+    <div class="p-col-12 p-xl-3 p-md-6">
+        <div class="p-grid p-nogutter overview-box overview-box-3">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-checkins.svg" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h1>Legislativos</h1>
+                <span>{{estadisticas.LegLast}} nuevos último mes</span>
+            </div>
+            <div class="p-col-3 overview-box-status">
+                {{estadisticas.Leg}}
+            </div>
+        </div>
+    </div>
+    <div class="p-col-12 p-xl-3 p-md-6">
+        <div class="p-grid p-nogutter overview-box overview-box-2">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-usersonline.png" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h1>Pub. Base Datos</h1>
+                <span>{{estadisticas.BdLast}} pub. semana actual</span>
+            </div>
+            <div class="p-col-3 overview-box-status">
+                {{estadisticas.Bd}}
+            </div>
+        </div>
+    </div>
+    <div class="p-col-12 p-xl-3 p-md-6">
+        <div class="p-grid p-nogutter overview-box overview-box-4">
+            <div class="p-col-3 overview-box-icon">
+                <img src="assets/layout/images/dashboard/icon-filessynced.svg" alt="mirage-layout" />
+            </div>
+            <div class="p-col-6 overview-box-text">
+                <h1>Pub. Sistema</h1>
+                <span>{{estadisticas.SisLast}} pub. semana actual</span>
+            </div>
+            <div class="p-col-3 overview-box-status">
+                {{estadisticas.Sis}}
+            </div>
+        </div>
+    </div>
+    <div class="p-col-12 p-lg-6">
+        <div class="p-grid p-dir-col p-nogutter">
+            <div class="p-col-12 ">
+                <div class="card statistics">
+                    <div class="p-grid">
+                        <div class="p-col-6 p-md-8">
+                            <h1>Publicaciones</h1>
+                        </div>
+                        <div class="p-col-6 p-md-4 dropdown">
+                            <p-dropdown [options]="dropdownYears" [(ngModel)]="selectedYear"></p-dropdown>
+                        </div>
+                    </div>
+                    <p-chart id="dashboard-chart" type="line" [data]="lineChartData" [options]="lineChartOptions">
+                    </p-chart>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div class="p-col-12 p-lg-3">
+        <div class="card download-files">
+            <div class="p-grid p-nogutter">
+                <div class="p-col-12 title">
+                    <h1>Últimas Publicaciones</h1>
+                </div>                
+            </div>
+            <ul>
+                <li *ngFor="let publicacion of publicaciones">
+                    <div class="p-grid list-item">
+                        <div class="p-col-2 icon">
+                            <img [src]="'data:image/JPG;base64,' + publicacion.Imagen" alt="Imagen">
+                        </div>
+                        <div class="p-col-10">
+                            <!-- <h2>{{publicacion.Desarrollador}}</h2> -->
+                            <h2>{{publicacion.Sistema}}</h2>
+                            <span>{{publicacion.Fecha | date: 'dd MMM yyyy HH:mm'}}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="list-effect"></div>
+        </div>
+    </div>
+</div>
